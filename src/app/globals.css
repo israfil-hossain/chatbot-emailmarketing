@@ -14,7 +14,7 @@ body {
   display: none;
 }
 
-.chat-window {
+.chat-window { 
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
