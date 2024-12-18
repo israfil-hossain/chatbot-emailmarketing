@@ -49,7 +49,18 @@ export const useSignUpForm = ()=>{
                 if(completeSignUp.status !== 'complete'){
                     return { message: 'Something went wrong !'}
                 }
-                if(completeSignUp.status == 'complete')
+                if(completeSignUp.status == 'complete'){
+                    if(!signUp.createdUserId) return 
+                    
+                    const registered = await onCompleteUserRegistration(
+                        values.fullname, 
+                        signUp.createdUserId, 
+                        values.type
+                    )
+                }
+            }
+            catch(err){
+                console.error(err);
             }
         }
     )
