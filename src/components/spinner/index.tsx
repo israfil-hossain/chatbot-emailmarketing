@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils'
 import React from 'react'
 
 type SpinnerProps = {
-  noPadding?: boolean
+  noPadding?: any 
 }
 
 export const Spinner = ({ noPadding }: SpinnerProps) => {
