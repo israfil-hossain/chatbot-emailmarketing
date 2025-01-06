@@ -1,5 +1,6 @@
 "use client"; 
 
+import { useSignInForm } from '@/hooks/sign-in/use-sign-in';
 import React from 'react'
 
 type Props = {
@@ -7,6 +8,7 @@ type Props = {
 }
 
 const SignInProvider = ({children}: Props) => {
+  const { methods, onHandleSubmit, loading } = useSignInForm()
   return (
     <div>SignInProvider</div>
   )
