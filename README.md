@@ -52,3 +52,8 @@ Our platform is packed with powerful features to streamline your marketing effor
 * 🌓 **Light/Dark Mode Toggle:** Cater to user preferences with customizable display options.
 * ⚙️ **Feature Control Settings:** Manage and control access to specific features.
 * 🔒 **Plan-Based Feature Restrictions:** Offer tiered plans with varying feature sets.
+
+** What is Next Plan :  
+    1. Setup Blog Post. 
+
+** Which Third Party is Used : 
