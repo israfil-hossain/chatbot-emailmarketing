@@ -9,9 +9,10 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { pricingCards } from '@/constants/landing-page'
 // import { pricingCards } from '@/constants/landing-page'
 import clsx from 'clsx'
-import { ArrowRightCircleIcon, Check } from 'lucide-react'
+import {  Check } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 // import parse from 'html-react-parser'
@@ -67,7 +68,7 @@ export default async function Home() {
         </p>
       </section>
       <div className="flex  justify-center gap-4 flex-wrap mt-6">
-        {/* {pricingCards.map((card) => (
+         {pricingCards.map((card) => (
           <Card
             key={card.title}
             className={clsx('w-[300px] flex flex-col justify-between', {
@@ -106,7 +107,7 @@ export default async function Home() {
               </Link>
             </CardFooter>
           </Card>
-        ))} */}
+        ))}
       </div>
 
       <section className="flex justify-center items-center flex-col gap-4 mt-28">
