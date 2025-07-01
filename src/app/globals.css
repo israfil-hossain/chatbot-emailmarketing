@@ -8,7 +8,29 @@ img {
 
 body {
   background: transparent;
+  font-family: var(--font-outfit), Arial, Helvetica, sans-serif;
 }
+
+@font-face {
+  font-family: "Redaction 10";
+  src: url("/fonts/redaction/RedactionItalic.otf");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-title {
+  font-family: "Redaction 10";
+  font-style: italic;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+
 
 .chat-window::-webkit-scrollbar {
   display: none;
@@ -30,7 +52,7 @@ body {
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: #391ef3;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;
@@ -157,3 +179,46 @@ body {
   width: 100% !important;
   border-radius: 20px;
 }
+
+/* global.css  */
+.ribbon {
+  position: absolute;
+  width: 2px;
+  height: 80px;
+  border-radius: 1px;
+  background: linear-gradient(to bottom, #ff6b6b, #f06595);
+  animation: float-ribbon 5s linear infinite;
+  opacity: 0.8;
+}
+
+/* Create curved drifting motion */
+@keyframes float-ribbon {
+  0% {
+    transform: translateY(-100%) rotate(0deg);
+  }
+  25% {
+    transform: translateY(25%) rotate(15deg);
+  }
+  50% {
+    transform: translateY(50%) rotate(-15deg);
+  }
+  75% {
+    transform: translateY(75%) rotate(10deg);
+  }
+  100% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+}
+
+/* Ribbon position + variation */
+.ribbon-0 { left: 5%; animation-delay: 0s; background: linear-gradient(to bottom, #f6a3a3, #233bc0); }
+.ribbon-1 { left: 15%; animation-delay: 0.5s; background: linear-gradient(to bottom, #6a5acd, #00bfff); }
+.ribbon-2 { left: 25%; animation-delay: 1s; }
+.ribbon-3 { left: 35%; animation-delay: 1.2s; background: linear-gradient(to bottom, #43e97b, #38f9d7); }
+.ribbon-4 { left: 45%; animation-delay: 1.5s; }
+.ribbon-5 { left: 55%; animation-delay: 1.8s; background: linear-gradient(to bottom, #f7971e, #ffd200); }
+.ribbon-6 { left: 65%; animation-delay: 2.1s; }
+.ribbon-7 { left: 75%; animation-delay: 2.4s; background: linear-gradient(to bottom, #dd298c, #904e95); }
+.ribbon-8 { left: 85%; animation-delay: 2.7s; }
+.ribbon-9 { left: 95%; animation-delay: 3s; background: linear-gradient(to bottom, #00c9ff, #92fe9d); }

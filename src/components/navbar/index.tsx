@@ -1,38 +1,116 @@
-import Image from 'next/image'
-import * as React from 'react'
-import Link from 'next/link'
+"use client";
 
-function NavBar() {
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+
+import {
+  MobileNav,
+  MobileNavHeader,
+  MobileNavMenu,
+  MobileNavToggle,
+  Navbar,
+  NavbarButton,
+  NavbarLogo,
+  NavBody,
+  NavItems,
+} from "../ui/resizable-navbar";
+import { useMediaQuery } from "@/hooks/media-query/use-media-query";
+
+export const Header = () => {
+  const pathname = usePathname();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { isOpen } = useMediaQuery();
+
+  const navItems = [
+    {
+      name: "Home",
+      link: "/",
+    },
+    {
+      name: "Features",
+      link: "#features",
+    },
+    {
+      name: "price",
+      link: "#price",
+    },
+    {
+      name: "Blog",
+      link: "/blogs",
+    },
+  ];
+
   return (
-    <div className="flex gap-5 justify-between items-center px-7 py-1 font-bold border-b border-solid border-zinc-100 leading-[154.5%] max-md:flex-wrap max-md:px-5">
-      <div className="flex gap-1.5 justify-center self-stretch my-auto text-2xl tracking-tighter text-neutral-700">
-        <Image
-          src="/images/logo.png"
-          alt="LOGO"
-          sizes="100vw"
-          style={{
-            width: '100px',
-            height: 'auto',
-          }}
-          width={0}
-          height={0}
-        />
-      </div>
-      <ul className="gap-5 justify-between self-stretch my-auto text-sm leading-5 text-neutral-700 max-md:flex-wrap max-md:max-w-full font-normal hidden md:flex">
-        <li>Home</li>
-        <li>Pricing</li>
-        <li>News Room</li>
-        <li>Features</li>
-        <li>Contact us</li>
-      </ul>
-      <Link
-        href="/dashboard"
-        className="bg-orange px-4 py-2 rounded-sm text-white"
-      >
-        Free Trial
-      </Link>
-    </div>
-  )
-}
+    <header className={` top-0 fixed  left-0  right-0 z-50 w-full`}>
+      <>
+        <Navbar>
+          {!isOpen ? (
+            <NavBody>
+              <NavbarLogo />
+              <NavItems items={navItems} />
+              <div className="flex items-center gap-4">
+                {/* <div className="w-20"></div> */}
 
-export default NavBar
+                <NavbarButton variant="secondary" href="/contact-us">
+                  Contact Us
+                </NavbarButton>
+                 <NavbarButton
+                    variant="primary"
+                    href="auth/sign-in"
+                  >
+                    Free Trial
+                  </NavbarButton>
+                {/* <NavbarButton variant="secondary">Book a call</NavbarButton>  */}
+                {/* <Link href="/login">
+                  <RainbowButton>Get Started</RainbowButton>
+                </Link> */}
+              </div>
+            </NavBody>
+          ) : (
+            <MobileNav>
+              <MobileNavHeader>
+                <NavbarLogo />
+                <MobileNavToggle
+                  isOpen={isMobileMenuOpen}
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                />
+              </MobileNavHeader>
+              <MobileNavMenu
+                isOpen={isMobileMenuOpen}
+                onClose={() => setIsMobileMenuOpen(false)}
+              >
+                {navItems.map((item, idx) => (
+                  <a
+                    key={`mobile-link-${idx}`}
+                    href={item.link}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="relative text-neutral-600 dark:text-neutral-300"
+                  >
+                    <span className="block">{item.name}</span>
+                  </a>
+                ))}
+                <div className="flex w-full flex-col gap-4">
+                  <NavbarButton variant="secondary" href="/contact-us">
+                    Contact Us
+                  </NavbarButton>
+                  
+                  <NavbarButton
+                    variant="primary"
+                    href="auth/sign-in"
+                  >
+                    Free Trial
+                  </NavbarButton>
+
+                  {/* <Link href="/login">
+                  <RainbowButton>Get Started</RainbowButton>
+                </Link> */}
+                  {/* <RainbowButton /> */}
+                </div>
+              </MobileNavMenu>
+            </MobileNav>
+          )}
+        </Navbar>
+      </>
+    </header>
+  );
+};

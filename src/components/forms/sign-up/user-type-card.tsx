@@ -18,12 +18,12 @@ type Props = {
 const UserTypeCard = ({ register, title, text, value, userType, setUserType }: Props) => {
     return (
         <Label htmlFor={value}>
-            <Card className={cn('w-full cursor-pointer', userType == value && 'border-orange')}>
+            <Card className={cn('w-full cursor-pointer', userType == value && 'border-primary')}>
                 <CardContent className='flex justify-between p-2'>
                     <div className='flex items-center gap-3'>
-                        <Card className={cn('flex justify-center p-3', userType == value && 'border-orange')}>
+                        <Card className={cn('flex justify-center p-3', userType == value && 'border-primary')}>
                             <User size={30}
-                                className={cn(userType == value ? 'text-orange' : 'text-gray-400')}
+                                className={cn(userType == value ? 'text-primary' : 'text-gray-400')}
                             />
                         </Card>
                         <div className=''>
@@ -32,7 +32,7 @@ const UserTypeCard = ({ register, title, text, value, userType, setUserType }: P
                         </div>
                     </div>
                     <div>
-                        <div className={cn('w-4 h-4 rounded-full', userType == value ? 'bg-orange' : 'text-platinum')}>
+                        <div className={cn('w-4 h-4 rounded-full', userType == value ? 'bg-primary' : 'text-platinum')}>
                             <Input 
                                 {...register('type',{
                                     onChange: (event:any) => setUserType(event.target.value),
