@@ -1,4 +1,6 @@
 import { onLoginUser } from '@/actions/auth';
+import SideBar from '@/components/sidebar';
+import { ChatProvider } from '@/context/user-chat-context';
 import React from 'react'
 
 type Props = {
@@ -9,7 +11,11 @@ const OwnerLayout = async (props: Props) => {
   const authenticated = await onLoginUser()
   if (!authenticated) return null; 
   return (
-    <div>OwnerLayout</div>
+   <ChatProvider>
+    <div className="flex h-screen w-full">
+      <SideBar />
+    </div>
+   </ChatProvider>
   )
 }
 
