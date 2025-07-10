@@ -1,0 +1,97 @@
+import ChatIcon from "@/icons/chat-icon";
+import EmailIcon from "@/icons/email-icon";
+import HelpDeskIcon from "@/icons/help-desk-icon";
+import StarIcon from "@/icons/star-icon";
+import TimerIcon from "@/icons/timer-icon";
+import { LayoutDashboard, MessageSquareMore, Settings, Settings2, SquareUser } from "lucide-react";
+
+type SIDE_BAR_MENU_PROPS = { 
+    label: string
+    icon : JSX.Element 
+    path: string 
+}
+export const SIDE_BAR_MENU: SIDE_BAR_MENU_PROPS[] = [
+    {
+        label: 'Dashboard', 
+        icon: <LayoutDashboard />,
+        path: 'dashboard'
+    }, 
+    {
+        label: 'Conversations', 
+        icon: <MessageSquareMore />,
+        path: 'conversation'
+    }, 
+    {
+        label: 'Integrations', 
+        icon: <Settings2 />,
+        path: 'integrations'
+    }, 
+    {
+        label: 'Settings', 
+        icon: <Settings />,
+        path: 'settings'
+    }, 
+    {
+        label: 'Appointments', 
+        icon: <SquareUser />,
+        path: 'appointment'
+    }, 
+    {
+        label: 'Email Marketing', 
+        icon: <EmailIcon />,
+        path: 'email-marketing'
+    }, 
+]
+
+type TABS_MENU_PROPS = {
+    label: string; 
+    icon?: JSX.Element
+}
+
+export const TABS_MENU: TABS_MENU_PROPS[] = [
+    {
+        label: 'unread', 
+        icon: <EmailIcon />
+    }, 
+    {
+        label: 'all', 
+        icon: <EmailIcon /> 
+    }, 
+    {
+        label: 'expired',
+        icon: <TimerIcon /> 
+    }, 
+    {
+        label: 'starred', 
+        icon: <StarIcon /> 
+    }
+]
+
+export const HELP_DESK_TABS_MENU: TABS_MENU_PROPS[] = [
+    {
+        label: 'help desk', 
+    }, 
+    {
+        label: 'questions'
+    }
+]
+
+export const APPOINTMENT_TABLE_HEADER = [
+    "Name", 
+    "RequestedTime", 
+    "Added Time", 
+    "Domain"
+]
+
+export const EMAIL_MARKETING_HEADER = ['Id', 'Email', 'Answers','Domain'] 
+
+export const BOT_TABS_MENU: TABS_MENU_PROPS[] = [
+    {
+        label: 'chat', 
+        icon: <ChatIcon /> 
+    }, 
+    {
+        label: 'helpdesk',
+        icon: <HelpDeskIcon /> 
+    }
+]

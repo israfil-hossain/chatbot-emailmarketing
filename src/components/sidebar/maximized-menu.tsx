@@ -1,4 +1,5 @@
-import { MenuIcon } from 'lucide-react';
+import { SIDE_BAR_MENU } from '@/constants/menu';
+import { LogOutIcon, MenuIcon } from 'lucide-react';
 import Image from 'next/image';
 import React from 'react';
 
@@ -56,7 +57,8 @@ const MaxMenu = ({ current, domains, onExpand, onSignOut }: Props) => {
                     <MenuItem 
                         size="max" 
                         label="Sign out"
-                        icon={<LogOut />}
+                        icon={<LogOutIcon />}
+                    />
                 </div>
             </div>
         </div>
