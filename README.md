@@ -54,6 +54,9 @@ Our platform is packed with powerful features to streamline your marketing effor
 * 🔒 **Plan-Based Feature Restrictions:** Offer tiered plans with varying feature sets.
 
 ** What is Next Plan :  
-    1. Setup Blog Post. 
+    1. Setup Blog Post on Landing Page. 
 
 ** Which Third Party is Used : 
+  1. Cloudinary : for image uploaded. 
+  2. NeonDB : Use PostgresSql database ORM 
+  3. Clerk : For Authentication. 
