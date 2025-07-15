@@ -1,9 +1,11 @@
 import ChatIcon from "@/icons/chat-icon";
+import DashboardIcon from "@/icons/dashboard-icon";
 import EmailIcon from "@/icons/email-icon";
 import HelpDeskIcon from "@/icons/help-desk-icon";
+import IntegrationsIcon from "@/icons/integrations-icon";
+import SettingsIcon from "@/icons/settings-icon";
 import StarIcon from "@/icons/star-icon";
 import TimerIcon from "@/icons/timer-icon";
-import { LayoutDashboard, MessageSquareMore, Settings, Settings2, SquareUser } from "lucide-react";
 
 type SIDE_BAR_MENU_PROPS = { 
     label: string
@@ -13,27 +15,27 @@ type SIDE_BAR_MENU_PROPS = {
 export const SIDE_BAR_MENU: SIDE_BAR_MENU_PROPS[] = [
     {
         label: 'Dashboard', 
-        icon: <LayoutDashboard />,
+        icon: <DashboardIcon />,
         path: 'dashboard'
     }, 
     {
         label: 'Conversations', 
-        icon: <MessageSquareMore />,
+        icon: <ChatIcon />,
         path: 'conversation'
     }, 
     {
         label: 'Integrations', 
-        icon: <Settings2 />,
+        icon: <IntegrationsIcon />,
         path: 'integrations'
     }, 
     {
         label: 'Settings', 
-        icon: <Settings />,
+        icon: <SettingsIcon />,
         path: 'settings'
     }, 
     {
         label: 'Appointments', 
-        icon: <SquareUser />,
+        icon: <HelpDeskIcon />,
         path: 'appointment'
     }, 
     {

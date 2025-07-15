@@ -1,5 +1,4 @@
 "use client";
-import { useMediaQuery } from "@/hooks/media-query/use-media-query";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import {
@@ -58,7 +57,6 @@ export const Navbar = ({ children, className }: NavbarProps) => {
     offset: ["start start", "end start"],
   });
   const [visible, setVisible] = useState<boolean>(false);
-  const { isOpen } = useMediaQuery();
 
   useMotionValueEvent(scrollY, "change", (latest:number) => {
     if (latest > 100) {

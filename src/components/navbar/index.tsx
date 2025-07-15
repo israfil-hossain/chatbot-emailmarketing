@@ -1,6 +1,5 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 import {
@@ -17,7 +16,6 @@ import {
 import { useMediaQuery } from "@/hooks/media-query/use-media-query";
 
 export const Header = () => {
-  const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { isOpen } = useMediaQuery();
 

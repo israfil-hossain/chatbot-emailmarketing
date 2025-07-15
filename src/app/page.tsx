@@ -4,7 +4,6 @@ import Icons from '@/components/global/icons'
 import { Header } from '@/components/navbar'
 import Promotion from '@/components/navbar/promotion'
 
-import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,
@@ -155,12 +154,12 @@ export default async function Home() {
         <h1 className="max-w-2xl mx-auto text-center font-medium text-4xl md:text-5xl lg:text-6xl">
           <span className="font-title">Choose what Fits </span> <br />
           <span className="font-uncut font-medium tracking-tighter">
-            Your'r Right.
+            Your are Right.
           </span>
         </h1>
         <p className='text-center  text-balance'>
-          Our transparent and flexible pricing plans are designed to fit your needs—whether you're just exploring or ready to scale.<br /> Not quite ready to commit?<br />
-          No problem. You can get started absolutely free and upgrade whenever you're ready.
+          Our transparent and flexible pricing plans are designed to fit your needs—whether you are just exploring or ready to scale.<br /> Not quite ready to commit?<br />
+          No problem. You can get started absolutely free and upgrade whenever you are ready.
         </p>
       </section>
       <div className="flex  justify-center gap-4 flex-wrap mt-12">

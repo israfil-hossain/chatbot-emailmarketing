@@ -3,6 +3,7 @@ import { LogOutIcon, MenuIcon } from 'lucide-react';
 import Image from 'next/image';
 import React from 'react';
 import DomainMenu from './domain-menu';
+import MenuItem from './menu-item';
 
 type Props = {
     onExpand(): void
@@ -18,7 +19,7 @@ type Props = {
     | undefined
 }
 
-const MaxMenu = ({ current, domains, onExpand, onSignOut }: Props) => {
+const MaxMenu = ({ current, domains, onExpand }: Props) => {
     return (
         <div className='py-3 px-4 flex flex-col h-full'>
             <div className="flex justify-between items-center">
