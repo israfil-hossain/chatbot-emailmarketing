@@ -7,8 +7,7 @@ import toast from "react-hot-toast";
 import { onGetConversationMode, onToggleRealtime } from "@/actions/conversation";
 import { useClerk } from "@clerk/nextjs";
 
-const useSideBar = () => {
-    const [expand, setExpand] = useState<boolean | undefined>(undefined);
+const useChatSidebar = () => {
     const router = useRouter();
     const pathname = usePathname()
     const [realtime, setRealtime] = useState<boolean>(false);
@@ -52,11 +51,7 @@ const useSideBar = () => {
 
     const onSignOut = () => signOut(() => router.push('/')) 
 
-    const onExpand = () => setExpand((prev) => !prev) 
-
     return {
-        expand, 
-        onExpand, 
         page, 
         onSignOut, 
         realtime, 
@@ -66,4 +61,4 @@ const useSideBar = () => {
     }
 };
 
-export default useSideBar; 
+export default useChatSidebar; 

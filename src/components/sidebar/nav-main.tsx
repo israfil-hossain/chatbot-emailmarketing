@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { PlusCircleIcon, MailIcon, ChevronRight } from "lucide-react";
+import { PlusCircleIcon, MailIcon, ChevronRight, Plus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
@@ -26,9 +26,22 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { type NavGroup, type NavMainItem } from "@/navigation/sidebar/sidebar-items";
+import AppDrawer from "../drawer";
+import { Loader } from "../loader";
+import { useDomain } from "@/hooks/sidebar/use-domain";
+import FormGenerator from "../forms/form-generator";
+import UploadButton from "../upload-button";
 
 interface NavMainProps {
   readonly items: readonly NavGroup[];
+  domains:
+  | {
+    id: string;
+    name: string;
+    icon: string;
+  }[]
+  | null
+  | undefined;
 }
 
 const IsComingSoon = () => (
@@ -141,7 +154,7 @@ const NavItemCollapsed = ({
   );
 };
 
-export function NavMain({ items }: NavMainProps) {
+export function NavMain({ items, domains }: NavMainProps) {
   const path = usePathname();
   const { state, isMobile } = useSidebar();
 
@@ -156,31 +169,12 @@ export function NavMain({ items }: NavMainProps) {
     return subItems?.some((sub) => path.startsWith(sub.url)) ?? false;
   };
 
+  const { register, handleSubmit, loading, errors, isDomain } = useDomain();
+
+
   return (
     <>
-      <SidebarGroup>
-        <SidebarGroupContent className="flex flex-col gap-2">
-          <SidebarMenu>
-            <SidebarMenuItem className="flex items-center gap-2">
-              <SidebarMenuButton
-                tooltip="Quick Create"
-                className="bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground min-w-8 duration-200 ease-linear"
-              >
-                <PlusCircleIcon />
-                <span>Quick Create</span>
-              </SidebarMenuButton>
-              <Button
-                size="icon"
-                className="h-9 w-9 shrink-0 group-data-[collapsible=icon]:opacity-0"
-                variant="outline"
-              >
-                <MailIcon />
-                <span className="sr-only">Inbox</span>
-              </Button>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarGroupContent>
-      </SidebarGroup>
+
       {items.map((group) => (
         <SidebarGroup key={group.id}>
           {group.label && <SidebarGroupLabel>{group.label}</SidebarGroupLabel>}
@@ -197,6 +191,51 @@ export function NavMain({ items }: NavMainProps) {
           </SidebarGroupContent>
         </SidebarGroup>
       ))}
+      <SidebarGroup>
+        <SidebarGroupContent className="flex flex-col gap-2">
+          <SidebarMenu>
+            <SidebarMenuItem className="flex items-center gap-2">
+              <SidebarMenuButton
+                tooltip="Create Domain"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground min-w-8 duration-200 ease-linear"
+              >
+               
+                <AppDrawer description='add in your do main address to integrate your chatbot' title="Add your business domain"
+                  onOpen={<div className='flex justify-between w-full items-center space-x-5 '>
+                     <PlusCircleIcon />
+                   <span>Add Domain</span>
+                  </div>
+                  }>
+                  <Loader loading={loading}>
+                    <form className='mt-3 w-6/12 flex flex-col gap-3 '
+                      onSubmit={handleSubmit}
+                    >
+                      <FormGenerator
+                        inputType="input"
+                        register={register}
+                        label="Domain"
+                        name='domain'
+                        errors={errors}
+                        placeholder="mydomain.com"
+                        type="text"
+                      />
+                      <UploadButton
+                        register={register}
+                        label="Upload Icon"
+                        errors={errors}
+                      />
+                      <Button type="submit" className="w-full">
+                        Add Domain
+                      </Button>
+                    </form>
+                  </Loader>
+                </AppDrawer>
+              </SidebarMenuButton>
+              
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
     </>
   );
 }

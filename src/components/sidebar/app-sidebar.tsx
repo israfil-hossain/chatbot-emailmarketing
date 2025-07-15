@@ -19,44 +19,7 @@ import { NavUser } from "./nav-user";
 import Image from "next/image";
 import { rootUser } from "@/constants/users";
 
-// const data = {
-//   navSecondary: [
-//     {
-//       title: "Settings",
-//       url: "#",
-//       icon: Settings,
-//     },
-//     {
-//       title: "Get Help",
-//       url: "#",
-//       icon: CircleHelp,
-//     },
-//     {
-//       title: "Search",
-//       url: "#",
-//       icon: Search,
-//     },
-//   ],
-//   documents: [
-//     {
-//       name: "Data Library",
-//       url: "#",
-//       icon: Database,
-//     },
-//     {
-//       name: "Reports",
-//       url: "#",
-//       icon: ClipboardList,
-//     },
-//     {
-//       name: "Word Assistant",
-//       url: "#",
-//       icon: File,
-//     },
-//   ],
-// };
-
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar {...props}>
       <SidebarHeader>
@@ -64,7 +27,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
               <a href="#">
-                <Image src={"/images/flowenai.png"} alt="logo" width={50} height={50} />
+                <Image
+                  src="/images/logo.svg"
+                  alt="logo"
+                  className="object-cover"
+                  width={48}
+                  height={40}
+                />
                 <span className="text-base font-semibold">{APP_CONFIG.name}</span>
               </a>
             </SidebarMenuButton>
@@ -72,8 +41,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={sidebarItems} />
-        {/* <NavDocuments items={data.documents} /> */}
+        <NavMain items={sidebarItems} domains={props.domains}/>
+        {/* <NavDocuments items={props.domains} /> */}
         {/* <NavSecondary items={data.navSecondary} className="mt-auto" /> */}
       </SidebarContent>
       <SidebarFooter>

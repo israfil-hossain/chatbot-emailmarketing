@@ -10,11 +10,14 @@ import {
   MessageSquare,
   Calendar,
   Kanban,
+  HeartHandshake,
   ReceiptText,
   Users,
   Lock,
   Fingerprint,
+  Cable,
   SquareArrowUpRight,
+  Settings,
   type LucideIcon,
 } from "lucide-react";
 
@@ -48,14 +51,14 @@ export const sidebarItems: NavGroup[] = [
         title: "Dashboards",
         url: "/dashboard",
         icon: Home,
-        subItems: [
-          { title: "Default", url: `/dashboard/default`, icon: ChartPie },
-          { title: "CRM", url: `/dashboard`, icon: Grid2X2, comingSoon: true },
-          { title: "Analytics", url: `/dashboard/analytics`, icon: ChartLine, comingSoon: true },
-          { title: "eCommerce", url: `/dashboard/e-commerce`, icon: ShoppingBag, comingSoon: true },
-          { title: "Academy", url: `/dashboard/academy`, icon: BookA, comingSoon: true },
-          { title: "Logistics", url: `/dashboard/logistics`, icon: Forklift, comingSoon: true },
-        ],
+        // subItems: [
+        //   { title: "Default", url: `/dashboard`, icon: ChartPie },
+        //    { title: "CRM", url: `/dashboard`, icon: Grid2X2, comingSoon: true },
+        //   { title: "Analytics", url: `/dashboard/analytics`, icon: ChartLine, comingSoon: true },
+        //   { title: "eCommerce", url: `/dashboard/e-commerce`, icon: ShoppingBag, comingSoon: true },
+        //    { title: "Academy", url: `/dashboard/academy`, icon: BookA, comingSoon: true },
+        //    { title: "Logistics", url: `/dashboard/logistics`, icon: Forklift, comingSoon: true },
+        // ],
       },
     ],
   },
@@ -63,37 +66,45 @@ export const sidebarItems: NavGroup[] = [
     id: 2,
     label: "Pages",
     items: [
+      
       {
-        title: "Email",
-        url: "/mail",
-        icon: Mail,
-        comingSoon: true,
-      },
-      {
-        title: "Chat",
-        url: "/chat",
+        title: "Conversations",
+        url: "/conversation",
         icon: MessageSquare,
-        comingSoon: true,
+        comingSoon: false,
       },
       {
-        title: "Calendar",
-        url: "/calendar",
-        icon: Calendar,
-        comingSoon: true,
+        title: "Integrations",
+        url: "/integrations",
+        icon: Cable,
+        comingSoon: false,
       },
       {
-        title: "Kanban",
-        url: "/kanban",
-        icon: Kanban,
-        comingSoon: true,
+        title: "Settings",
+        url: "/settings",
+        icon: Settings,
+        comingSoon: false,
       },
       {
-        title: "Invoice",
-        url: "/invoice",
-        icon: ReceiptText,
-        comingSoon: true,
+        title: "Appointment",
+        url: "/appointment",
+        icon: HeartHandshake,
+        comingSoon: false,
       },
       {
+        title: "Email Marketing",
+        url: "/email-marketing",
+        icon: Mail,
+        comingSoon: false,
+      },
+     
+    ],
+  },
+  {
+    id: 3,
+    label: "User Setting",
+    items: [
+       {
         title: "Users",
         url: "/users",
         icon: Users,
@@ -111,12 +122,6 @@ export const sidebarItems: NavGroup[] = [
         icon: Fingerprint,
         comingSoon: true,
       },
-    ],
-  },
-  {
-    id: 3,
-    label: "Misc",
-    items: [
       {
         title: "Others",
         url: "/others",
