@@ -49,7 +49,9 @@ export default async function OwnerLayout({ children }: Readonly<{ children: Rea
               </div>
             </div>
           </header>
+          <div className="h-screen w-full flex flex-col py-3 pr-10 pl-20 md:px-10">
           {children}
+          </div>
         </SidebarInset>
       </SidebarProvider>
     </ChatProvider>
