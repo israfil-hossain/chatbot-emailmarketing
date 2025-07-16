@@ -19,6 +19,7 @@ import {
   SquareArrowUpRight,
   Settings,
   type LucideIcon,
+  CalendarDays,
 } from "lucide-react";
 
 export interface NavSubItem {
@@ -26,12 +27,14 @@ export interface NavSubItem {
   url: string;
   icon?: LucideIcon;
   comingSoon?: boolean;
+  img?:any
 }
 
 export interface NavMainItem {
   title: string;
   url: string;
   icon?: LucideIcon;
+  img?:any; 
   subItems?: NavSubItem[];
   comingSoon?: boolean;
 }
@@ -66,7 +69,7 @@ export const sidebarItems: NavGroup[] = [
     id: 2,
     label: "Pages",
     items: [
-      
+
       {
         title: "Conversations",
         url: "/conversation",
@@ -88,7 +91,7 @@ export const sidebarItems: NavGroup[] = [
       {
         title: "Appointment",
         url: "/appointment",
-        icon: HeartHandshake,
+        icon: CalendarDays,
         comingSoon: false,
       },
       {
@@ -97,36 +100,43 @@ export const sidebarItems: NavGroup[] = [
         icon: Mail,
         comingSoon: false,
       },
-     
+
     ],
   },
   {
     id: 3,
     label: "User Setting",
     items: [
-       {
+      {
         title: "Users",
-        url: "/users",
+        url: "#",
         icon: Users,
-        comingSoon: true,
-      },
-      {
-        title: "Roles",
-        url: "/roles",
-        icon: Lock,
-        comingSoon: true,
-      },
-      {
-        title: "Auth Screens",
-        url: "/auth",
-        icon: Fingerprint,
-        comingSoon: true,
-      },
-      {
-        title: "Others",
-        url: "/others",
-        icon: SquareArrowUpRight,
-        comingSoon: true,
+        subItems: [
+          {
+            title: "Users",
+            url: "/users",
+            icon: Users,
+            comingSoon: true,
+          },
+          {
+            title: "Roles",
+            url: "/roles",
+            icon: Lock,
+            comingSoon: true,
+          },
+          {
+            title: "Auth",
+            url: "/auth",
+            icon: Fingerprint,
+            comingSoon: true,
+          },
+          {
+            title: "Others",
+            url: "/others",
+            icon: SquareArrowUpRight,
+            comingSoon: true,
+          },
+        ],
       },
     ],
   },

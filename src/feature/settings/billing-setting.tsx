@@ -1,7 +1,7 @@
 import { onGetSubscriptionPlan } from '@/actions/settings'
 import React from 'react'
-import Section from '../section-label';
-import { Card, CardContent, CardDescription } from '../ui/card';
+import Section from '../../components/section-label';
+import { Card, CardContent, CardDescription } from '../../components/ui/card';
 import { Plus } from 'lucide-react';
 
 type Props = {}

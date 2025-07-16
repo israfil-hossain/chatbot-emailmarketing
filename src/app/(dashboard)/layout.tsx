@@ -23,6 +23,7 @@ export default async function OwnerLayout({ children }: Readonly<{ children: Rea
   const sidebarVariant = await getSidebarVariant();
   const sidebarCollapsible = await getSidebarCollapsible();
 
+  console.log("authenticated: ", authenticated); 
 
   return (
     <ChatProvider>

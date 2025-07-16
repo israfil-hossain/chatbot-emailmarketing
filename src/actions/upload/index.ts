@@ -1,45 +1,30 @@
-'use server'; 
-import cloudinary from '@/lib/cloudinary';
-import formidable, { File } from 'formidable';
-import fs from 'fs';
+// lib/upload-to-cloudinary.ts
+'use server'
 
-// Disable Next.js default body parser
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+import { v2 as cloudinary } from 'cloudinary'
+import { Readable } from 'stream'
 
-export default async function handler(req: any, res: any) {
-  if (req.method !== 'POST') return res.status(405).end();
+cloudinary.config({
+  cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME!,
+  api_key: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY!,
+  api_secret: process.env.NEXT_PUBLIC_CLOUDINARY_SECRET!,
+})
 
-  const form = formidable({ multiples: false });
+export const uploadToCloudinary = async (file: File) => {
+  const buffer = Buffer.from(await file.arrayBuffer())
 
-  form.parse(req, async (err, fields, files) => {
-    if (err) return res.status(500).json({ error: 'Form parsing error' });
-
-    let file: File | undefined;
-    if (files && files.file) {
-      if (Array.isArray(files.file)) {
-        file = files.file[0];
-      } else {
-        file = files.file;
+  return new Promise<{ url: string }>((resolve, reject) => {
+    const upload = cloudinary.uploader.upload_stream(
+      { folder: 'domain-icons' },
+      (error, result) => {
+        if (error) {
+          reject(new Error(error.message))
+        } else {
+          resolve({ url: result?.secure_url! })
+        }
       }
-    }
-    if (!file) return res.status(400).json({ error: 'No file uploaded' });
+    )
 
-    try {
-      const result = await cloudinary.uploader.upload(file.filepath, {
-        folder: 'uploads',
-      });
-
-      // Optionally remove the temp file
-      fs.unlink(file.filepath, () => {});
-
-      return res.status(200).json({ url: result.secure_url, public_id: result.public_id });
-    } catch (error) {
-      console.error(error);
-      return res.status(500).json({ error: 'Upload failed' });
-    }
-  });
+    Readable.from(buffer).pipe(upload)
+  })
 }

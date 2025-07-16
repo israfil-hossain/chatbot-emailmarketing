@@ -1,5 +1,5 @@
 import InfoBar from '@/components/infobar'
-import BillingSetting from '@/components/settings/billing-setting'
+import BillingSetting from '@/feature/settings/billing-setting'
 import React from 'react'
 
 type Props = {}

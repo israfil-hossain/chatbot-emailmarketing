@@ -1,5 +1,6 @@
 'use client';
 import { onIntegrateDomain } from "@/actions/settings";
+import { uploadToCloudinary } from "@/actions/upload";
 import { AddDomainSchema } from "@/schemas/settings.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { usePathname, useRouter } from "next/navigation";
@@ -8,7 +9,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
 export const useDomain = () => {
-    const { register, handleSubmit, formState: { errors }, reset } = useForm<FieldValues>({
+    const { register, handleSubmit, formState: { errors }, reset, setValue, watch } = useForm<FieldValues>({
         resolver: zodResolver(AddDomainSchema)
     });
 
@@ -21,54 +22,46 @@ export const useDomain = () => {
         setIsDomain(pathname.split('/').pop());
     }, [pathname]);
 
-    const onAddDomain = handleSubmit(async (values: FieldValues) => {
-        setIsLoading(true);
 
+
+    const submit = async (values: FieldValues) => {
+        setIsLoading(true)
         try {
-            // Prepare file upload
-            const formData = new FormData();
-            formData.append('file', values.image[0]);
-
-            // Upload image to Cloudinary via your API
-            const uploadRes = await fetch('/api/upload', {
-                method: 'POST',
-                body: formData,
-            });
-
-            const uploadData = await uploadRes.json();
-
-            if (!uploadRes.ok) {
-                throw new Error(uploadData.error || 'Image upload failed');
+            let uploadedUrl = ''
+            if (values.image instanceof File) {
+                const uploadRes = await uploadToCloudinary(values.image)
+                uploadedUrl = uploadRes.url
+            } else {
+                toast.error("Please upload a valid image")
+                setIsLoading(false)
+                return
             }
 
-            // Now add the domain in db here.. 
-            const domain = await onIntegrateDomain(values.domain, uploadData.url)
+            const domain = await onIntegrateDomain(values.domain, uploadedUrl)
 
             if (domain) {
                 reset()
-                setIsLoading(false);
-                if (domain.status == 200) {
-                    toast.success(domain.message || "success")
-                }
-                else {
+                if (domain.status === 200) {
+                    toast.success(domain.message || "Success")
+                } else {
                     toast.error(domain.message || "Error")
                 }
+                router.refresh()
             }
-
-           router.refresh(); 
-        } catch (error) {
-            // Handle error (show toast, etc.)
-            console.error(error);
+        } catch (err) {
+            console.error(err)
+            toast.error("Something went wrong")
         } finally {
-            setIsLoading(false);
+            setIsLoading(false)
         }
-    });
+    }
 
     return {
         register,
-        handleSubmit: onAddDomain,
+        onAddDomain: handleSubmit(submit),
         errors,
         loading,
         isDomain,
+        setValue,
     };
 };

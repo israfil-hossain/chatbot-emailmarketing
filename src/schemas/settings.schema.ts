@@ -12,12 +12,17 @@ export const AddDomainSchema = z.object({
                 /^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,}$/.test(value ?? ''),
             { message: "This is not a valid domain" }
         ),
-    image: z
-        .any()
-        .refine((files) => files && files[0] && files[0].size <= MAX_UPLOAD_SIZE, {
-            message: "Your file size must be less than 2MB",
-        })
-        .refine((files) => files && ACCEPTED_FILE_TYPES.includes(files[0]?.type), {
-            message: "Only JPG, JPEG & PNG are accepted file formats",
-        }),
+    // image: z
+    //     .any()
+    //     .refine((files) => files?.length > 0, {
+    //         message: "Image is required",
+    //     })
+    //     .refine((files) => files?.[0]?.size <= MAX_UPLOAD_SIZE, {
+    //         message: "Your file size must be less than 2MB",
+    //     })
+    //     .refine((files) => ACCEPTED_FILE_TYPES.includes(files?.[0]?.type), {
+    //         message: "Only JPG, JPEG & PNG are accepted file formats",
+    //     }),
+    //     image: z
+     image: z.instanceof(File, { message: "Image is required" })
 });
