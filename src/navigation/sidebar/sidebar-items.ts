@@ -20,6 +20,9 @@ import {
   Settings,
   type LucideIcon,
   CalendarDays,
+  User,
+  Palette,
+  Bell,
 } from "lucide-react";
 
 export interface NavSubItem {
@@ -27,16 +30,22 @@ export interface NavSubItem {
   url: string;
   icon?: LucideIcon;
   comingSoon?: boolean;
-  img?:any
+  img?: any
 }
 
 export interface NavMainItem {
   title: string;
   url: string;
   icon?: LucideIcon;
-  img?:any; 
+  img?: any;
   subItems?: NavSubItem[];
   comingSoon?: boolean;
+}
+
+export interface SidebarMenuItem {
+  title: string; 
+  url: string; 
+  icon?:LucideIcon; 
 }
 
 export interface NavGroup {
@@ -44,6 +53,7 @@ export interface NavGroup {
   label?: string;
   items: NavMainItem[];
 }
+
 
 export const sidebarItems: NavGroup[] = [
   {
@@ -139,5 +149,23 @@ export const sidebarItems: NavGroup[] = [
         ],
       },
     ],
+  },
+];
+
+export const sidebarNavItems: SidebarMenuItem[] = [
+  {
+    title: "Profile",
+    icon: User,
+    url: "/settings",
+  },
+  {
+    title: "Appearance",
+    icon: Palette,
+    url: "/settings/appearance",
+  },
+  {
+    title: "Notifications",
+    icon: Bell,
+    url: "/settings/notifications",
   },
 ];

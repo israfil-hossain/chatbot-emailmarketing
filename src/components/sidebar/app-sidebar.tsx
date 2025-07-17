@@ -9,7 +9,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar";
+} from "./sidebar";
 import { APP_CONFIG } from "@/config/app-config";
 
 import { sidebarItems } from "@/navigation/sidebar/sidebar-items";

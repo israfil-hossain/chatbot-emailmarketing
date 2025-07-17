@@ -2,9 +2,9 @@ import { onLoginUser } from "@/actions/auth";
 import AccountSwitcher from "@/components/sidebar/account-switcher";
 import { AppSidebar } from "@/components/sidebar/app-sidebar";
 import LayoutControls from "@/components/sidebar/layout-controls";
+import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/sidebar/sidebar";
 import ThemeSwitcher from "@/components/sidebar/theme-switcher";
 import { Separator } from "@/components/ui/separator";
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { users } from "@/constants/users";
 
 import { ChatProvider } from "@/context/user-chat-context";

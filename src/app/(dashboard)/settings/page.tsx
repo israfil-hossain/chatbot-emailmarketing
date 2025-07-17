@@ -1,16 +1,14 @@
 import InfoBar from '@/components/infobar'
-import BillingSetting from '@/feature/settings/billing-setting'
+import BreadCrumb from '@/components/infobar/bread-crumb'
+import ProfilePage from '@/feature/settings/profile'
+
 import React from 'react'
 
 
 const Page = () => {
   return (
     <>
-        <InfoBar />
-        <div className='overflow-y-auto w-full chat-window flex-1 h-0 flex flex- col gap-10'>
-            <BillingSetting />
-            
-        </div>
+       <ProfilePage />
     </>
   )
 }
