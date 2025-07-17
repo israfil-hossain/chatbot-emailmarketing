@@ -2,9 +2,8 @@ import InfoBar from '@/components/infobar'
 import BillingSetting from '@/feature/settings/billing-setting'
 import React from 'react'
 
-type Props = {}
 
-const Page = (props: Props) => {
+const Page = () => {
   return (
     <>
         <InfoBar />
