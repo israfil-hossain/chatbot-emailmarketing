@@ -3,6 +3,12 @@ import { z } from "zod"
 const MAX_UPLOAD_SIZE = 2 * 1024 * 1024; // 2MB
 const ACCEPTED_FILE_TYPES = ["image/jpeg", "image/png", "image/jpg"];
 
+export type DomainSettingsProps = {
+    domain?:string 
+    image?:any 
+    welcomeMessage?:string 
+}
+
 export const AddDomainSchema = z.object({
     domain: z
         .string()
@@ -26,3 +32,16 @@ export const AddDomainSchema = z.object({
     //     image: z
      image: z.instanceof(File, { message: "Image is required" })
 });
+
+export const DomainSettingsSchema = z.object({
+     domain: z
+        .string()
+        .min(4, { message: "A Domain must be at least 4 characters" })
+        .refine(
+            (value) =>
+                /^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,}$/.test(value ?? ''),
+            { message: "This is not a valid domain" }
+        ),
+        image: z.instanceof(File, { message: "Image is required" }), 
+        welcomeMessage: z.string().min(6,'The message must be atleast 6 chracters').optional().or(z.literal('').transform(()=> undefined))
+})

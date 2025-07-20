@@ -1,5 +1,5 @@
-import InfoBar from '@/components/infobar'
-import BreadCrumb from '@/components/infobar/bread-crumb'
+import InfoBar from '@/components/global/infobar'
+import BreadCrumb from '@/components/global/infobar/bread-crumb'
 import ProfilePage from '@/feature/settings/profile'
 
 import React from 'react'

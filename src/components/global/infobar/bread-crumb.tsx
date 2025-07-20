@@ -1,8 +1,8 @@
 'use client';
 import useChatSidebar from '@/context/use-chat-sidebar';
 import React from 'react'
-import { Loader } from '../loader';
-import { Switch } from '../ui/switch';
+import { Loader } from '../../loader';
+import { Switch } from '../../ui/switch';
 
 type Props = {}
 
@@ -26,7 +26,13 @@ const BreadCrumb = (props: Props) => {
       <p className='text-gray-500 text-sm'>
         {
           page == 'settings' 
-          ? 'Manage your account settings, preferrences and integrations' 
+          ? 'Manage your account settings, preferrences and integrations'
+          : page == 'integrations' 
+          ? "Here's a list of your apps for the integration!"
+          : page == "change-password"
+          ? 'Reset Your Password'
+          : page == 'account'
+          ? 'Update your Account Information'
           : page == 'dashboard' 
           ? 'A detailed overview of your metrics, usage, customers and more' 
           : page == 'appointment' 

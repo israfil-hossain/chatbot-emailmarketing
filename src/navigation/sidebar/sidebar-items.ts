@@ -1,17 +1,6 @@
 import {
-  Home,
-  ChartPie,
-  Grid2X2,
-  ChartLine,
-  ShoppingBag,
-  BookA,
-  Forklift,
   Mail,
   MessageSquare,
-  Calendar,
-  Kanban,
-  HeartHandshake,
-  ReceiptText,
   Users,
   Lock,
   Fingerprint,
@@ -23,6 +12,7 @@ import {
   User,
   Palette,
   Bell,
+  LayoutGrid,
 } from "lucide-react";
 
 export interface NavSubItem {
@@ -43,9 +33,9 @@ export interface NavMainItem {
 }
 
 export interface SidebarMenuItem {
-  title: string; 
-  url: string; 
-  icon?:LucideIcon; 
+  title: string;
+  url: string;
+  icon?: LucideIcon;
 }
 
 export interface NavGroup {
@@ -63,7 +53,7 @@ export const sidebarItems: NavGroup[] = [
       {
         title: "Dashboards",
         url: "/dashboard",
-        icon: Home,
+        icon: LayoutGrid,
         // subItems: [
         //   { title: "Default", url: `/dashboard`, icon: ChartPie },
         //    { title: "CRM", url: `/dashboard`, icon: Grid2X2, comingSoon: true },
@@ -79,7 +69,6 @@ export const sidebarItems: NavGroup[] = [
     id: 2,
     label: "Pages",
     items: [
-
       {
         title: "Conversations",
         url: "/conversation",

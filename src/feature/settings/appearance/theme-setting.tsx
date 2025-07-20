@@ -6,7 +6,7 @@ type Props = {}
 
 const ThemeSettingPage = (props: Props) => {
   return (
-     <div>
+     <div className='min-h-[100vh]'>
         <AppearanceForm />
      </div>
   )

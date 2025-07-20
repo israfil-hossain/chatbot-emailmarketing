@@ -1,8 +1,8 @@
 import React from 'react'
 import BreadCrumb from './bread-crumb'
-import { Card } from '../ui/card'
+import { Card } from '../../ui/card'
 import { Headphones, Star, Trash } from 'lucide-react'
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar'
 
 type Props = {}
 

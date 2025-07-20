@@ -2,7 +2,7 @@
 import React from 'react'
 import SidebarNav from '@/components/sidebar/sidebar-nav'
 import { sidebarSettingItems } from '@/navigation/sidebar/sidebar-setting-items'
-import BreadCrumb from '@/components/infobar/bread-crumb';
+import BreadCrumb from '@/components/global/infobar/bread-crumb';
 
 type Props = {
     children: React.ReactNode; 

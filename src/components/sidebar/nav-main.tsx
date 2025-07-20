@@ -59,6 +59,7 @@ const NavItemExpanded = ({
   isActive: (url: string, subItems?: NavMainItem["subItems"]) => boolean;
   isSubmenuOpen: (subItems?: NavMainItem["subItems"]) => boolean;
 }) => {
+  console.log("item : ", item);
   return (
     <Collapsible key={item.title} asChild defaultOpen={isSubmenuOpen(item.subItems)} className="group/collapsible">
       <SidebarMenuItem>
@@ -69,15 +70,7 @@ const NavItemExpanded = ({
               isActive={isActive(item.url, item.subItems)}
               tooltip={item.title}
             >
-              {item.img &&
-                <Image
-                  src={item.img}
-                  alt="logo"
-                  width={20}
-                  height={20}
-                  className="rounded-full"
-                />
-}
+
               {
                 item.icon && <item.icon />
               }
@@ -94,6 +87,15 @@ const NavItemExpanded = ({
             >
               <Link href={item.url}>
                 {item.icon && <item.icon />}
+                {item.img &&
+                  <Image
+                    src={item.img}
+                    alt="logo"
+                    width={20}
+                    height={20}
+                    className="rounded-full bg-white"
+                  />
+                }
                 <span>{item.title}</span>
                 {item.comingSoon && <IsComingSoon />}
               </Link>
@@ -197,7 +199,7 @@ export function NavMain({ items, domains }: NavMainProps) {
 
   const domainItems: NavMainItem[] = (domains || []).map((domain) => ({
     title: domain.name,
-    url: `/settings/${domain.name.split('.')[0]}`,
+    url: `/domain-settings/${domain.name.split('.')[0]}`,
     img: domain.icon
   }))
 

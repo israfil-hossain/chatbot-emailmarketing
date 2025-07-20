@@ -16,6 +16,7 @@ import {
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { useTheme } from 'next-themes'
 import LayoutControls from '@/components/sidebar/layout-controls';
+import ProfileLayoutSetting from './layout-setting';
 
 const appearanceFormSchema = z.object({
   theme: z.enum(['light', 'dark'], {
@@ -160,9 +161,10 @@ export function AppearanceForm() {
         <div>
             
         </div>
-        <LayoutControls variant="sidebar" collapsible="icon" />
+        {/* <LayoutControls variant="sidebar" collapsible="icon" /> */}
+        <ProfileLayoutSetting variant="sidebar" collapsible="icon"/>
 
-        <Button type='submit'>Update preferences</Button>
+        <Button type='submit' className='cursor-pointer'>Update preferences</Button>
       </form>
     </Form>
   )

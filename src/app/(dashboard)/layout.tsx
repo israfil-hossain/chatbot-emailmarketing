@@ -23,12 +23,12 @@ export default async function OwnerLayout({ children }: Readonly<{ children: Rea
   const sidebarVariant = await getSidebarVariant();
   const sidebarCollapsible = await getSidebarCollapsible();
 
-  console.log("authenticated: ", authenticated); 
+  console.log("authenticated: ", authenticated);
 
   return (
     <ChatProvider>
       <SidebarProvider defaultOpen={defaultOpen}>
-        <AppSidebar variant={sidebarVariant} collapsible={sidebarCollapsible} domains={authenticated?.domain}/>
+        <AppSidebar variant={sidebarVariant} collapsible={sidebarCollapsible} domains={authenticated?.domain} />
         <SidebarInset>
           <header className="flex h-12 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
             <div className="flex w-full items-center justify-between px-4 lg:px-6">
@@ -38,7 +38,7 @@ export default async function OwnerLayout({ children }: Readonly<{ children: Rea
                   orientation="vertical"
                   className="mx-2 data-[orientation=vertical]:h-4"
                 />
-               
+
               </div>
               <div className="flex items-center gap-2">
                 <LayoutControls
@@ -50,8 +50,8 @@ export default async function OwnerLayout({ children }: Readonly<{ children: Rea
               </div>
             </div>
           </header>
-          <div className="h-screen w-full flex flex-col py-3 pr-10 pl-20 md:px-10">
-          {children}
+          <div className="h-[90vh] w-full flex flex-col py-3 pr-10 pl-20 md:px-10">
+            {children}
           </div>
         </SidebarInset>
       </SidebarProvider>
