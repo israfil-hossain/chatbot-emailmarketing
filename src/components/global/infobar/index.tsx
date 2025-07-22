@@ -8,25 +8,21 @@ type Props = {}
 
 const InfoBar = (props: Props) => {
   return (
-    <div className='flex w-full justify-between items-center py-1 mb-8'>
+    <div className='flex w-full justify-between items-center py-1 mb-8 px-5'>
         <BreadCrumb />
         <div className='flex gap-3 items-center'>
             <div>
-                <Card className='rounded-xl flex gap-3 py-3 px-4 text-ghost'>
+                <Card className='rounded-xl flex flex-row  gap-3 py-3 px-4 text-ghost'>
                     <Trash /> 
                     <Star />
                 </Card>
             </div>
-            <Avatar>
+            {/* <Avatar>
                 <AvatarFallback className='bg-primary text-white'>
                     <Headphones />
                 </AvatarFallback>
-            </Avatar>
-            <Avatar>
-                <AvatarImage 
-                  src="https://github.com/shadcn.png" alt="@shadcn"/>
-                <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
+            </Avatar> */}
+          
         </div>
     </div>
   )

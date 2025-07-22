@@ -242,9 +242,9 @@ export const NavbarLogo = () => {
   return (
     <Link
       href="/"
-      className="relative z-20 flex items-center px-2 py-1 text-sm font-normal text-black"
+      className="relative z-20 flex items-center px-2 py-1 text-sm font-normal text-black dark:text-gray-400"
     >
-      <Image src={"/images/logo.png"} alt="logo" width={60} height={60} className="" />
+      <Image src={"/images/logo.svg"} alt="logo" width={60} height={60} className="" />
       <span className="font-bold text-2xl">flowen</span>
       <span className="font-bold text-2xl text-primary/80 ">AI</span>
     </Link>

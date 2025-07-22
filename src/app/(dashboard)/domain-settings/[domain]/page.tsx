@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic"
-
 import { onGetCurrentDomainInfo } from '@/actions/settings'
 import DomainSettingPage from '@/feature/settings/domain-setting'
 import { redirect } from 'next/navigation'
@@ -10,11 +8,13 @@ type Props = {
 }
 
 const Page = async ({ params }: Props) => {
-  const domain = await onGetCurrentDomainInfo(params?.domain)
-  if (!domain) redirect('/dashboard')
+  const { domain } = await params
+  const domainInfo = await onGetCurrentDomainInfo(domain)
+  if (!domainInfo) redirect('/dashboard')
   return (
-    <DomainSettingPage domain={domain} />
+    <DomainSettingPage domain={domainInfo} />
   )
 }
+
 
 export default Page

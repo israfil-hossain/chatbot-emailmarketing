@@ -121,7 +121,7 @@ export default async function Home() {
 
                 <Link
                   href="/contact-us"
-                  className="flex items-center gap-2 py-2.5 px-5 rounded-full border font-medium font-manrope text-base text-neutral-700 hover:border-primary/90 hover:text-primary/90 duration-500"
+                  className="flex items-center gap-2 py-2.5 px-5 rounded-full border border-primary  hover:border-primary-foreground font-medium font-manrope text-primary   hover:text-primary/90 duration-500"
                 >
                   <PhoneIcon size={16} />
                   Contact Us
@@ -196,7 +196,7 @@ export default async function Home() {
               </div>
               <Link
                 href={`/dashbord?plan=${card.title}`}
-                className="bg-[#f3d299] border-primary border-2 p-2 w-full text-center font-bold rounded-md"
+                className="bg-primary border-primary border-2 p-2 w-full text-center font-bold rounded-md"
               >
                 Get Started
               </Link>
