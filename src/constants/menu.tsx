@@ -6,6 +6,7 @@ import IntegrationsIcon from "@/icons/integrations-icon";
 import SettingsIcon from "@/icons/settings-icon";
 import StarIcon from "@/icons/star-icon";
 import TimerIcon from "@/icons/timer-icon";
+import { IconQuestionMark } from "@tabler/icons-react";
 
 type SIDE_BAR_MENU_PROPS = { 
     label: string
@@ -72,9 +73,11 @@ export const TABS_MENU: TABS_MENU_PROPS[] = [
 export const HELP_DESK_TABS_MENU: TABS_MENU_PROPS[] = [
     {
         label: 'help desk', 
+        icon: <HelpDeskIcon />
     }, 
     {
-        label: 'questions'
+        label: 'questions', 
+        icon: <IconQuestionMark />
     }
 ]
 

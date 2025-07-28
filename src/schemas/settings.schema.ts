@@ -45,3 +45,22 @@ export const DomainSettingsSchema = z.object({
         image: z.instanceof(File, { message: "Image is required" }), 
         welcomeMessage: z.string().min(6,'The message must be atleast 6 chracters').optional().or(z.literal('').transform(()=> undefined))
 })
+
+export type HelpDeskQuestionsProps = {
+    question: string 
+    answer: string 
+}
+
+export const HelpDeskQuestionsSchema = z.object({
+    question: z.string().min(3, 'Question cannot be left empty'),
+    answer: z.string().min(3, 'Answer cannot be left empty'),
+})
+
+export const FilterQuestionsSchema = z.object({
+    question: z.string().min(3, 'Question cannot be left empty'),
+})
+
+export const AddProductSchema = z.object({
+    name: z.string().min(3,{ message: 'The name must have atleast 3 chracters'}), 
+    image: z.instanceof(File, { message: "Image is required" })
+})

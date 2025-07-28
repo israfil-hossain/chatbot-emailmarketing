@@ -1,10 +1,11 @@
-import { onChatBotImageUpdate, onDeleteUserDomain, onUpdateDomain, onUpdatePassword, onUpdateWelcomeMessage } from "@/actions/settings"
+'use client'; 
+import { onChatBotImageUpdate, onCreateHelpDeskQuestion, onDeleteUserDomain, onGetAllHelpDeskQuestions, onUpdateDomain, onUpdatePassword, onUpdateWelcomeMessage } from "@/actions/settings"
 import { uploadToCloudinary } from "@/actions/upload"
 import { ChangePasswordProps, ChangePasswordSchema } from "@/schemas/auth.schema"
-import { DomainSettingsProps, DomainSettingsSchema } from "@/schemas/settings.schema"
+import { DomainSettingsProps, DomainSettingsSchema, HelpDeskQuestionsProps, HelpDeskQuestionsSchema } from "@/schemas/settings.schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 
@@ -50,6 +51,7 @@ export const useSetting = (id: string) => {
     } = useForm<DomainSettingsProps>({
         resolver: zodResolver(DomainSettingsSchema)
     })
+    const [value,setValue] = useState<any>(); 
     const router = useRouter();
     const [loading, setLoading] = useState<boolean>(false)
     const [deleting, setDeleting] = useState<boolean>(false)
@@ -108,6 +110,59 @@ export const useSetting = (id: string) => {
         loading, 
         onDeleteDomain, 
         deleting, 
+        setValue, 
+    }
+}
 
+export const useHelpDesk = (id:string) => {
+    const { 
+        register, 
+        formState: { errors } , 
+        handleSubmit, 
+        reset, 
+    } = useForm<HelpDeskQuestionsProps>({
+        resolver: zodResolver(HelpDeskQuestionsSchema)
+    })
+    const [loading, setLoading ]  = useState<boolean>(false) 
+    const [isQuestion,setIsQuestion] = useState<{id:string; question: string; answer: string}[]>([])
+
+    const onSubmitQuestion = handleSubmit(async (values) => {
+        setLoading(true) 
+        const question = await onCreateHelpDeskQuestion(
+            id, 
+            values.question, 
+            values.answer 
+        )
+        if(question){
+            setIsQuestion(question.questions!) 
+            toast.success(question.message); 
+            setLoading(false)
+            reset()
+        }
+    })
+
+    const onGetQuestions = async () => {
+        try{
+            const questions = await onGetAllHelpDeskQuestions(id)
+            if(questions){
+                setIsQuestion(questions.questions)
+                setLoading(false)
+            }
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
+
+    useEffect(()=> {
+        onGetQuestions()
+    },[])
+    return {
+        register, 
+        errors, 
+        onSubmitQuestion, 
+        loading, 
+        isQuestion, 
+        onGetQuestions
     }
 }

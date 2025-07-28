@@ -1,4 +1,5 @@
 import SettingsForm from '@/components/forms/settings';
+import BotTraningForm from '@/components/forms/settings/bot-training';
 import InfoBar from '@/components/global/infobar'
 import React from 'react'
 
@@ -19,6 +20,7 @@ const DomainSettingPage = ({domain}: Props) => {
         id={domain?.domains[0]?.id} 
         name={domain?.domains[0]?.name}
         />
+        <BotTraningForm id={domain.domains[0].id}/>
     </div>
    </>
   )

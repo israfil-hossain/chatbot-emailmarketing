@@ -338,3 +338,67 @@ export const onUpdatePassword = async (password: string) => {
         console.log(err);
     }
 }
+
+export const onCreateHelpDeskQuestion = async (id:string, question:string, answer:string) => {
+    try{
+        const helpDeskQuestion = await client.domain.update({
+            where: {
+                id,
+            }, 
+            data: {
+                helpdesk:{
+                    create: {
+                        question, 
+                        answer,
+                    }
+                }
+            }, 
+            include: {
+                helpdesk: {
+                    select: {
+                        id: true, 
+                        question: true, 
+                        answer: true
+                    }
+                }
+            }
+        })
+        if(helpDeskQuestion){
+            return{
+                status: 200, 
+                message: "New help desk question added", 
+                questions : helpDeskQuestion.helpdesk
+            }
+        }
+        return { 
+            status: 400 , 
+            message: "Oops! Something went wrong", 
+        }
+    }
+    catch(error){
+        console.log(error); 
+    }
+}
+
+export const onGetAllHelpDeskQuestions = async (id:string) => {
+    try{
+        const helpDeskQuestion = await client.helpDesk.findMany({
+            where: { 
+                domainId: id, 
+            }, 
+            select: {
+                question: true, 
+                answer: true, 
+                id: true
+            }
+        })
+        return { 
+            status: 200 , 
+            message: "New help desk question added", 
+            questions: helpDeskQuestion
+        }
+    }
+    catch(error){
+        console.log(error); 
+    }
+}
