@@ -23,7 +23,7 @@ export default async function OwnerLayout({ children }: Readonly<{ children: Rea
   const sidebarVariant = await getSidebarVariant();
   const sidebarCollapsible = await getSidebarCollapsible();
   
-  // If you're using headers() anywhere, make sure to await it
+  // Await headers() before using
   const headersList = await headers();
 
   console.log("authenticated: ", authenticated);

@@ -1,10 +1,12 @@
 'use client';
 import Section from '@/components/section-label'
-import { Card, CardContent, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card'
 import { useHelpDesk } from '@/hooks/settings/use-settings'
 import React from 'react'
 import FormGenerator from '../form-generator';
 import { Button } from '@/components/ui/button';
+import { Loader } from '@/components/loader';
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
 
 type Props = {
     id: string
@@ -60,6 +62,24 @@ const HelpDesk = ({ id }: Props) => {
                         Create
                     </Button>
                 </form>
+            </CardContent>
+            <CardContent className='p-6 overflow-y-auto chat-window'>
+                <CardTitle>Questions</CardTitle>
+                <Loader loading={loading}>
+                    <div className='mt-10 flex flex-col gap-6'>
+                        {isQuestion.length ?
+                            <Accordion type="single" collapsible>
+                                {isQuestion.map((question) => (
+                                    <AccordionItem key={question.id} value={question.id}>
+                                        <AccordionTrigger>{question.question}</AccordionTrigger>
+                                        <AccordionContent>{question.answer}</AccordionContent>
+                                    </AccordionItem>
+                                ))}
+                            </Accordion>
+                            : (<CardDescription>No Question to Shows!</CardDescription>)   
+                    }
+                    </div>
+                </Loader>
             </CardContent>
         </Card>
     )
