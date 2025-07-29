@@ -1,4 +1,5 @@
 // import { onGetBlogPosts } from '@/actions/landing'
+import Footer from '@/feature/landing-page/footer'
 import Container from '@/components/global/container'
 import Icons from '@/components/global/icons'
 import { Header } from '@/components/navbar'
@@ -14,11 +15,15 @@ import {
 } from '@/components/ui/card'
 import { OrbitingCircles } from '@/components/ui/orbiting-circles'
 import { pricingCards } from '@/constants/landing-page'
+import BlogSection from '@/feature/landing-page/blog-section'
+import { IconBrandGmail, IconBrandSlack, IconBrandStripe, IconZoom, IconBrandNotion, IconBrandTelegram } from '@tabler/icons-react'
 // import { pricingCards } from '@/constants/landing-page'
 import clsx from 'clsx'
-import { Check, PhoneIcon } from 'lucide-react'
+import { Check, PhoneIcon, Bot } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import IntegrationsSection from '@/feature/landing-page/integrations'
+import { HowItWorksSection } from '@/feature/landing-page/sections/how-it-works'
 // import parse from 'html-react-parser'
 // import { getMonthName } from '@/lib/utils'
 
@@ -152,7 +157,7 @@ export default async function Home() {
       <section id="#price" className="flex justify-center items-center flex-col gap-4 mt-10">
 
         <h1 className="max-w-2xl mx-auto text-center font-medium text-4xl md:text-5xl lg:text-6xl">
-          <span className="font-title">Choose what Fits </span> <br />
+          <span className="font-title italic">Choose what Fits </span> <br />
           <span className="font-uncut font-medium tracking-tighter">
             Your are Right.
           </span>
@@ -161,7 +166,7 @@ export default async function Home() {
           Our transparent and flexible pricing plans are designed to fit your needs—whether you are just exploring or ready to scale.<br /> Not quite ready to commit?<br />
           No problem. You can get started absolutely free and upgrade whenever you are ready.
         </p>
-      </section>
+     
       <div className="flex  justify-center gap-4 flex-wrap mt-12">
         {pricingCards.map((card) => (
           <Card
@@ -204,47 +209,155 @@ export default async function Home() {
           </Card>
         ))}
       </div>
+     </section>
+      
+      <section id="features" className="py-24 w-full items-center ">
+        <Container className='flex flex-col justify-center items-center mx-5'>
+          <div className="text-center mb-16">
+            <h1 className="max-w-2xl mx-auto text-center font-medium text-4xl md:text-5xl lg:text-6xl">
+              <span className="font-title italic"> Powerful Features for  </span> <br />
+              <span className="font-uncut font-medium tracking-tighter ">
+                Modern Businesses
+              </span>
+            </h1>
+            <p className="text-muted-foreground text-center max-w-lg">
+              Everything you need to automate customer engagement, capture leads, and grow your business with AI
+            </p>
+          </div>
 
-      <section id="blogs" className="flex justify-center items-center flex-col gap-4 mt-28">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl margin-auto items-center ">
+            <Card className="p-6 hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                <Bot className="w-6 h-6 text-primary" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">AI Sales Assistant</h3>
+              <p className="text-muted-foreground">Intelligent chatbot that qualifies leads, answers questions, and drives conversions 24/7</p>
+            </Card>
 
-        <h1 className="max-w-2xl mx-auto text-center font-medium text-4xl md:text-5xl lg:text-6xl">
-          <span className="font-title">Updated  </span> <br />
-          <span className="font-uncut font-medium tracking-tighter">
-            Our News
-          </span>
-        </h1>
-        <p className="text-muted-foreground text-center max-w-lg">
-          Explore our insights on AI, technology, and optimizing your business.
-        </p>
+            <Card className="p-6 hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                <Icons.mail className="w-6 h-6 text-primary" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Email Marketing</h3>
+              <p className="text-muted-foreground">Automated email campaigns with AI-powered personalization and advanced analytics</p>
+            </Card>
 
-        <div className="md:grid-cols-3 grid-cols-1 grid gap-5 container mt-8">
-          {/* {posts &&
-          posts.map((post) => (
-            <Link
-              href={`/blogs/${post.id}`}
-              key={post.id}
-            >
-              <Card className="flex flex-col gap-2 rounded-xl overflow-hidden h-full hover:bg-gray-100">
-                <div className="relative w-full aspect-video">
-                  <Image
-                    src={`${process.env.CLOUDWAYS_UPLOADS_URL}${post.image}`}
-                    alt="post featured image"
-                    fill
-                  />
-                </div>
-                <div className="py-5 px-10 flex flex-col gap-5">
-                  <CardDescription>
-                    {getMonthName(post.createdAt.getMonth())}{' '}
-                    {post.createdAt.getDate()} {post.createdAt.getFullYear()}
-                  </CardDescription>
-                  <CardTitle>{post.title}</CardTitle>
-                  {parse(post.content.slice(4, 100))}...
-                </div>
-              </Card>
-            </Link>
-          ))} */}
-        </div>
+            <Card className="p-6 hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                <Icons.calendar className="w-6 h-6 text-primary" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Smart Booking</h3>
+              <p className="text-muted-foreground">Automated appointment scheduling with payment processing and calendar integration</p>
+            </Card>
+
+            <Card className="p-6 hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                <Icons.integration className="w-6 h-6 text-primary" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Easy Integration</h3>
+              <p className="text-muted-foreground">One-click website integration with customizable design and white-label options</p>
+            </Card>
+
+            <Card className="p-6 hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                <Icons.analytics className="w-6 h-6 text-primary" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Advanced Analytics</h3>
+              <p className="text-muted-foreground">Real-time insights, conversion tracking, and detailed performance reports</p>
+            </Card>
+
+            <Card className="p-6 hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                <Icons.security className="w-6 h-6 text-primary" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Enterprise Security</h3>
+              <p className="text-muted-foreground">Bank-level security with OTP verification, secure file uploads, and data protection</p>
+            </Card>
+          </div>
+        </Container>
       </section>
+
+      <HowItWorksSection />
+
+     <IntegrationsSection />
+
+      <section id="testimonials" className="py-24">
+        <Container>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary/90 mb-4">
+              Trusted by Growing Businesses
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              See what our customers say about FlowenAI
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="p-6">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-primary/10 rounded-full mr-4"></div>
+                <div>
+                  <h4 className="font-semibold">Sarah Johnson</h4>
+                  <p className="text-sm text-muted-foreground">Marketing Director</p>
+                </div>
+              </div>
+              <p className="text-muted-foreground">"FlowenAI increased our lead conversion by 300%. The AI assistant handles customer queries perfectly, even outside business hours."</p>
+            </Card>
+
+            <Card className="p-6">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-primary/10 rounded-full mr-4"></div>
+                <div>
+                  <h4 className="font-semibold">Mike Chen</h4>
+                  <p className="text-sm text-muted-foreground">Agency Owner</p>
+                </div>
+              </div>
+              <p className="text-muted-foreground">"The white-label feature is amazing. I can offer this to my clients under my own brand. It's been a game-changer for my agency."</p>
+            </Card>
+
+            <Card className="p-6">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-primary/10 rounded-full mr-4"></div>
+                <div>
+                  <h4 className="font-semibold">Emma Davis</h4>
+                  <p className="text-sm text-muted-foreground">E-commerce Owner</p>
+                </div>
+              </div>
+              <p className="text-muted-foreground">"Setup was incredibly easy. Within 10 minutes, I had an AI assistant on my website capturing leads and booking appointments."</p>
+            </Card>
+          </div>
+        </Container>
+      </section>
+
+      <section id="cta" className="py-24 bg-primary/5">
+        <Container>
+          <div className="text-center">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary/90 mb-4">
+              Ready to Transform Your Business?
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
+              Join thousands of businesses using FlowenAI to automate customer engagement and boost sales
+            </p>
+            <div className="flex items-center justify-center gap-4">
+              <Link
+                href="https://calendly.com/flowenai"
+                target="_blank"
+                className="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-full font-semibold transition-colors"
+              >
+                Start Free Trial
+              </Link>
+              <Link
+                href="/contact-us"
+                className="border border-primary text-primary hover:bg-primary hover:text-white px-8 py-3 rounded-full font-semibold transition-colors"
+              >
+                Schedule Demo
+              </Link>
+            </div>
+          </div>
+        </Container>
+      </section>
+      <BlogSection />
+      <Footer />
     </main>
   )
 }

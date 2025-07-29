@@ -1,8 +1,10 @@
-'use client'; 
+'use client';
 import Section from '@/components/section-label'
 import { Card, CardContent, CardTitle } from '@/components/ui/card'
 import { useHelpDesk } from '@/hooks/settings/use-settings'
 import React from 'react'
+import FormGenerator from '../form-generator';
+import { Button } from '@/components/ui/button';
 
 type Props = {
     id: string
@@ -26,7 +28,37 @@ const HelpDesk = ({ id }: Props) => {
                             label="Question"
                             message="Add a question that you believe is frequently asked"
                         />
+                        <FormGenerator
+                            inputType='input'
+                            register={register}
+                            errors={errors}
+                            name="question"
+                            form='help-desk-form'
+                            type='text'
+                            placeholder='Type your question0'
+                        />
                     </div>
+                    <div className='flex flex-col gap-3'>
+                        <Section
+                            label="Answer to question"
+                            message="Add an answer to the question"
+                        />
+                        <FormGenerator
+                            inputType='textarea'
+                            register={register}
+                            errors={errors}
+                            name='answer'
+                            form='help-desk-form'
+                            type='text'
+                            placeholder='Type your answer'
+                        />
+                    </div>
+                    <Button
+                        type="submit"
+                        className='bg-primary hover:opacity-70 transition duration-150 ease-in-out text-white font-semibold'
+                    >
+                        Create
+                    </Button>
                 </form>
             </CardContent>
         </Card>
