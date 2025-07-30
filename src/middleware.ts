@@ -1,8 +1,17 @@
 import { authMiddleware } from '@clerk/nextjs'
+import { NextResponse } from 'next/server'
 
 export default authMiddleware({
   publicRoutes: ['/', '/auth(.*)', '/portal(.*)', '/images(.*)', '/favicon.ico'],
   ignoredRoutes: ['/chatbot'],
+  afterAuth(auth, req) {
+    // Track API usage for billing
+    if (req.nextUrl.pathname.startsWith('/api/ai/') && auth.userId) {
+      // This will be handled in the individual API routes
+    }
+    
+    return NextResponse.next()
+  }
 })
 
 export const config = {

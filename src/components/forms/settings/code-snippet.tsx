@@ -13,33 +13,59 @@ const CodeSnippet = ({id}: Props) => {
     const [copied, setCopied] = useState(false)
     
     let snippet = `
-        const iframe = document.createElement("iframe"); 
+<!-- FlowenAI Chatbot Widget -->
+<script>
+(function() {
+    const iframe = document.createElement("iframe");
 
-        const iframeStyles = (stylesString) => {
-            const style = document.createElement("style");
-            style.textContent = stylesString;
-            document.head.appendChild(style);
+    const iframeStyles = (stylesString) => {
+        const style = document.createElement("style");
+        style.textContent = stylesString;
+        document.head.appendChild(style);
+    }
+
+    iframeStyles(\`
+        .flowenai-chat-frame {
+            position: fixed !important;
+            bottom: 20px !important;
+            right: 20px !important;
+            border: none !important;
+            border-radius: 12px !important;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15) !important;
+            z-index: 999999 !important;
+            background: white !important;
         }
-
-        iframeStyles('
-        .chat-frame{
-            position: fixed; 
-            bottom: 50px; 
-            right: 50px; 
-            border: none; 
+        @media (max-width: 768px) {
+            .flowenai-chat-frame {
+                bottom: 10px !important;
+                right: 10px !important;
+                left: 10px !important;
+                width: calc(100% - 20px) !important;
+                max-width: 350px !important;
+            }
         }
-    ')
-    iframe.src = "http://localhost:3000/chatbot" 
-    iframe.classList.add('chat-frame') 
-    document.body.appendChild(iframe) 
+    \`)
 
-    window.addEventListener("message",(e) => {
-        if(e.origin !== "http://localhost:3000/") return null 
-        let dimensions = JSON.parse(e.data) 
-        iframe.width = dimensions.width 
-        iframe.height = dimensions.height
-        iframe.contentWindow.postMessage("${id}","http://localhost:3000/") 
+    iframe.src = "https://yourdomain.com/chatbot"
+    iframe.classList.add('flowenai-chat-frame')
+    iframe.setAttribute('title', 'FlowenAI Chatbot')
+    iframe.setAttribute('allow', 'microphone')
+    document.body.appendChild(iframe)
+
+    window.addEventListener("message", (e) => {
+        if(e.origin !== "https://yourdomain.com") return null
+        try {
+            let dimensions = JSON.parse(e.data)
+            iframe.width = dimensions.width
+            iframe.height = dimensions.height
+            iframe.contentWindow.postMessage("${id}", "https://yourdomain.com")
+        } catch(err) {
+            console.log('FlowenAI: Invalid message format')
+        }
     })
+})();
+</script>
+<!-- End FlowenAI Chatbot Widget -->
     `
 
     const handleCopy = async () => {

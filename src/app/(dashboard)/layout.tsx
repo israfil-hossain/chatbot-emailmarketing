@@ -9,7 +9,7 @@ import { users } from "@/constants/users";
 
 import { ChatProvider } from "@/context/user-chat-context";
 import { getSidebarCollapsible, getSidebarVariant } from "@/lib/layout-preferences";
-import { cookies, headers } from "next/headers";
+import { cookies } from "next/headers";
 import React, { ReactNode } from "react";
 
 
@@ -22,9 +22,6 @@ export default async function OwnerLayout({ children }: Readonly<{ children: Rea
 
   const sidebarVariant = await getSidebarVariant();
   const sidebarCollapsible = await getSidebarCollapsible();
-  
-  // Await headers() before using
-  const headersList = await headers();
 
   console.log("authenticated: ", authenticated);
 

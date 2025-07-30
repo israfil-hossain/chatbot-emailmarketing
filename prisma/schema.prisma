@@ -20,21 +20,23 @@ model User {
   type      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  email     String   @unique
+  stripeId  String?
 
-  stripeId String?
-
-  domains Domain[]
-
-  campaign Campaign[]
-
-  subscription Billings?
+  // Relationships
+  subscription   Billings?
+  domains        Domain[]
+  workspaces     Workspace[]
+  campaigns      Campaign[]
+  socialAccounts SocialAccount[]
+  appointments   Appointment[]
+  aiUsage        AIUsage[]
 }
 
 model Domain {
-  id   String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name String
-  icon String
-
+  id              String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name            String
+  icon            String
   chatBot         ChatBot?
   helpdesk        HelpDesk[]
   filterQuestions FilterQuestions[]
@@ -59,11 +61,16 @@ model ChatBot {
 }
 
 model Billings {
-  id      String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  plan    Plans   @default(STANDARD)
-  credits Int     @default(10)
-  User    User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId  String? @unique @db.Uuid
+  id                   String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  plan                 Plans     @default(FREE)
+  aiTokens             Int       @default(20)
+  emailCredits         Int       @default(10)
+  socialPosts          Int       @default(0)
+  workspaceLimit       Int       @default(1)
+  stripeSubscriptionId String?
+  currentPeriodEnd     DateTime?
+  User                 User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId               String?   @unique @db.Uuid
 }
 
 model HelpDesk {
@@ -94,7 +101,7 @@ model CustomerResponses {
 
 model Customer {
   id    String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  email String? 
+  email String?
 
   questions CustomerResponses[]
 
@@ -141,14 +148,18 @@ model Bookings {
 }
 
 model Campaign {
-  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name      String
-  customers String[]
-  domain    Domain[]
-  template  String?
-  User      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String?  @db.Uuid
-  createdAt DateTime @default(now())
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name        String
+  type        String // EMAIL, SOCIAL, CONTENT
+  status      String    @default("DRAFT")
+  content     Json?
+  scheduledAt DateTime?
+  User        User      @relation(fields: [userId], references: [id])
+  userId      String    @db.Uuid
+  Workspace   Workspace @relation(fields: [workspaceId], references: [id])
+  workspaceId String    @db.Uuid
+  domains     Domain[] // Add this line
+  createdAt   DateTime  @default(now())
 }
 
 model Product {
@@ -161,10 +172,54 @@ model Product {
   domainId  String?  @db.Uuid
 }
 
+model Workspace {
+  id          String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name        String
+  description String?
+  User        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String     @db.Uuid
+  campaigns   Campaign[]
+  createdAt   DateTime   @default(now())
+}
+
+model SocialAccount {
+  id           String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  platform     String
+  accessToken  String
+  refreshToken String?
+  accountId    String
+  accountName  String
+  User         User    @relation(fields: [userId], references: [id])
+  userId       String  @db.Uuid
+}
+
+model Appointment {
+  id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title         String
+  description   String?
+  startTime     DateTime
+  endTime       DateTime
+  attendeeEmail String
+  status        String   @default("SCHEDULED")
+  User          User     @relation(fields: [userId], references: [id])
+  userId        String   @db.Uuid
+  createdAt     DateTime @default(now())
+}
+
+model AIUsage {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  type      String // CONTENT_GENERATION, CHATBOT, EMAIL_TEMPLATE
+  tokens    Int
+  User      User     @relation(fields: [userId], references: [id])
+  userId    String   @db.Uuid
+  createdAt DateTime @default(now())
+}
+
 enum Plans {
-  STANDARD
+  FREE
+  STARTER
   PRO
-  ULTIMATE
+  ENTERPRISE
 }
 
 enum Role {
